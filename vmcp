@@ -1,0 +1,45 @@
+#!/bin/sh
+
+from=$1
+to=$2
+
+if [ ! -d $from ] ; then
+	echo "Cannot find the source '$from'."
+	exit 1
+fi
+
+if [ -e $to ] ; then
+	echo "Destination $to already exists."
+	exit 1
+fi
+
+cp -a $from $to
+cd $to
+
+from_name=`basename -s.vmwarevm $from`
+to_name=`basename -s.vmwarevm $to`
+# Rename files
+for i in $from_name*
+do              
+  name=$( echo $i | sed -e "s/$from_name/$to_name/" )
+  mv "$i" "$name"
+done;
+
+rm -f quicklook-cache.png
+rm -f *.vmsd
+rm -f *.log
+rm -rf *.lck
+
+# Alter name in config files
+for i in `grep -l $from_name *`
+do
+	sed "s/$from_name/$to_name/" < $i > $i.out
+	mv $i.out $i
+done;
+
+# Alter the Ethernet address
+# "create" means that VMWare will generate a new MAC
+# automatically
+echo 'uuid.action="create"' >> $to_name.vmx
+
+cd ..
