@@ -1,0 +1,26 @@
+VMWare Support Tools
+====================
+
+:Author: Alex Satrapa
+:Contact: grail@goldweb.com.au
+
+.. contents::
+
+PXE Booting
+-----------
+
+ - Start a TFTP server with "tftpboot" as its root directory
+ - Shut down VMWare
+ - Stop the VMWare infrastructure ('boot.sh --stop')
+ - In the vmnet8/dhcpd.conf, add "next-server" with the TFTP server's IP address
+ - In the vnmet8/dhcpd.conf, add "filename 'pxelinux.0';"
+ - Start the VMWare infrastructure ('boot.sh --start')
+
+Preseeding
+----------
+
+PXELINUX can tell the booting kernel where to load the preseed from, but Debian-Installer must use FTP or HTTP for preseed. There is a patch in the works [509723]_ to allow Debian-Installer to use tftp (via enabling Busybox tftp client).
+
+.. [509723] Debian Bug Report #509723, "`Support TFTP preseed fetch method`_"
+
+.. _`Support TFTP preseed fetch method`: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=509723
