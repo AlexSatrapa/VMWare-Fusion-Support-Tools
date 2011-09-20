@@ -1,0 +1,3 @@
+#!/bin/sh
+rsync -r tftpboot/ /private/tftpboot
+cp conf/preseed.cfg /Library/WebServer/Documents/d-i

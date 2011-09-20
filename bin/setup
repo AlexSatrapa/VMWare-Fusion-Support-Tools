@@ -5,3 +5,6 @@ sed '/option routers 192.168.228.2;/ a\
 \	filename "pxelinux.0";\
 ' '/Library/Application Support/VMWare Fusion/vmnet8/dhcpd.conf' > /tmp/dhcpd.conf
 mv /tmp/dhcpd.conf '/Library/Application Support/VMWare Fusion/vmnet8/dhcpd.conf'
+
+mkdir /Library/WebServer/Documents/d-i
+/sbin/service tftp start
