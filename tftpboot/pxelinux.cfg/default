@@ -48,8 +48,8 @@ menu begin install
 
 	label mysql
 		menu label ^MySQL Server
-		kernel debian-mysql/lenny/i386/linux
-		append priority=low vga=normal initrd=debian/lenny/i386/initrd.gz preseed/url=http://192.168.228.1/d-i/mysql-preseed.txt --
+		kernel debian/lenny/i386/linux
+		append priority=critical vga=normal initrd=debian/lenny/i386/initrd.gz preseed/url=http://192.168.228.1/d-i/mysql-preseed.cfg locale=en_AU.UTF-8 console-keymaps-at/keymap=us netcfg/choose_interface=eth0 hostname=mysqlauto domain=secret.lab
 
 	label rescue
 		menu label ^Rescue mode
