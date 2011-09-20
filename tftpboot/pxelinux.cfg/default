@@ -34,10 +34,22 @@ menu begin install
 		menu label Debian 5 "^Lenny"
 		kernel debian/lenny/i386/linux
 		append priority=low vga=normal initrd=debian/lenny/i386/initrd.gz -- 
+
+	label debauto
+		# http://www.hps.com/~tpg/notebook/autoinstall.php
+		menu label Debian 5 "Lenny" (^Auto)
+		kernel debian/lenny/i386/linux
+		append priority=critical vga=normal initrd=debian/lenny/i386/initrd.gz preseed/url=http://192.168.228.1/d-i/preseed.cfg locale=en_AU.UTF-8 console-keymaps-at/keymap=us netcfg/choose_interface=eth0 hostname=debauto domain=secret.lab
+
 	label ubuntu8
 		menu label Ubuntu 8.04 "^Hardy Heron"
 		kernel ubuntu/hardy/i386/linux
 		append vga=normal initrd=ubuntu/hardy/i386/initrd.gz ramdisk_size=14332 root=/dev/rd/0 rw --
+
+	label mysql
+		menu label ^MySQL Server
+		kernel debian-mysql/lenny/i386/linux
+		append priority=low vga=normal initrd=debian/lenny/i386/initrd.gz preseed/url=http://192.168.228.1/d-i/mysql-preseed.txt --
 
 	label rescue
 		menu label ^Rescue mode
