@@ -1,6 +1,7 @@
 # D-I config version 1.0
 
-default pxelinux.cfg/vesamenu.c32
+default debian6
+# pxelinux.cfg/vesamenu.c32
 prompt 0
 timeout 0
 
@@ -41,6 +42,11 @@ menu begin install
 		menu label Debian 5 "Lenny" (^Auto)
 		kernel debian/lenny/i386/linux
 		append priority=critical vga=normal initrd=debian/lenny/i386/initrd.gz preseed/url=http://192.168.228.1/d-i/preseed.cfg locale=en_AU.UTF-8 console-keymaps-at/keymap=us netcfg/choose_interface=eth0 hostname=debauto domain=secret.lab
+
+	label debian6
+		menu label Debian 6 "^Squeeze" (Auto)
+		kernel debian/squeeze/i386/linux
+		append priority=critical vga=normal initrd=debian/squeeze/i386/initrd.gz preseed/url=http://192.168.228.1/d-i/squeeze.cfg locale=en_AU.UTF-8 console-keymaps-at/keymap=us netcfg/choose_interface=eth0 country=AU language=en
 
 	label debian5
 		menu label Debian 5 "^Lenny"
