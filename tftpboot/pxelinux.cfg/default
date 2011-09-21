@@ -1,5 +1,9 @@
 # D-I config version 1.0
 
+default pxelinux.cfg/vesamenu.c32
+prompt 0
+timeout 0
+
 menu hshift 25
 menu width 49
 
@@ -22,24 +26,26 @@ menu cmdlinerow -4
 menu timeoutrow -4
 menu tabmsgrow -2
 menu tabmsg Press ENTER to boot or TAB to edit a menu entry
+menu autoboot Foo in # second{,s}...
 
-default install
 menu begin install
+	menu default
 	menu title Installers
 	label mainmenu
 		menu label ^Back..
 		menu exit
 
+	label debauto
+		# http://www.hps.com/~tpg/notebook/autoinstall.php
+		menu default
+		menu label Debian 5 "Lenny" (^Auto)
+		kernel debian/lenny/i386/linux
+		append priority=critical vga=normal initrd=debian/lenny/i386/initrd.gz preseed/url=http://192.168.228.1/d-i/preseed.cfg locale=en_AU.UTF-8 console-keymaps-at/keymap=us netcfg/choose_interface=eth0 hostname=debauto domain=secret.lab
+
 	label debian5
 		menu label Debian 5 "^Lenny"
 		kernel debian/lenny/i386/linux
 		append priority=low vga=normal initrd=debian/lenny/i386/initrd.gz -- 
-
-	label debauto
-		# http://www.hps.com/~tpg/notebook/autoinstall.php
-		menu label Debian 5 "Lenny" (^Auto)
-		kernel debian/lenny/i386/linux
-		append priority=critical vga=normal initrd=debian/lenny/i386/initrd.gz preseed/url=http://192.168.228.1/d-i/preseed.cfg locale=en_AU.UTF-8 console-keymaps-at/keymap=us netcfg/choose_interface=eth0 hostname=debauto domain=secret.lab
 
 	label ubuntu8
 		menu label Ubuntu 8.04 "^Hardy Heron"
@@ -83,7 +89,3 @@ label help
    Display help screens; type 'menu' at boot prompt to return to this menu
 	endtext
 	config pxelinux.cfg/prompt.cfg
-
-default pxelinux.cfg/vesamenu.c32
-prompt 0
-timeout 0
