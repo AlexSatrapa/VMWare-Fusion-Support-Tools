@@ -1,27 +1,27 @@
 #!/bin/sh
 
-from=$1
-to=$2
+from="$1"
+to="$2"
 
-if [ ! -d $from ] ; then
+if [ ! -d "$from" ] ; then
 	echo "Cannot find the source '$from'."
 	exit 1
 fi
 
-if [ -e $to ] ; then
+if [ -e "$to" ] ; then
 	echo "Destination $to already exists."
 	exit 1
 fi
 
-cp -a $from $to
-cd $to
+cp -a "$from" "$to"
+cd "$to"
 
-from_name=`basename -s.vmwarevm $from`
-to_name=`basename -s.vmwarevm $to`
+from_name=`basename -s.vmwarevm "$from"`
+to_name=`basename -s.vmwarevm "$to"`
 # Rename files
 for i in $from_name*
 do              
-  name=$( echo $i | sed -e "s/$from_name/$to_name/" )
+  name=$( echo "$i" | sed -e "s/$from_name/$to_name/" )
   mv "$i" "$name"
 done;
 

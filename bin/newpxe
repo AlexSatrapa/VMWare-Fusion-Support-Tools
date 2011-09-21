@@ -1,0 +1,7 @@
+#!/bin/sh
+set -x
+VMSTORE="/Users/alex/Documents/Virtual Machines.localized"
+BINDIR=`dirname $0`
+[ -d "$VMSTORE" ] || exit 1
+$BINDIR/vmcp "$VMSTORE/PXE-Boot.vmwarevm" "$VMSTORE/$1.vmwarevm"
+open "$VMSTORE/$1.vmwarevm"
